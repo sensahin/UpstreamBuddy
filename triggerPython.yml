@@ -1,0 +1,17 @@
+name: triggerPython
+on:
+  schedule:
+  - cron: '*/30 * * * *' # Runs at every 30 minute.
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+          cache: 'pip'
+      - run: pip install requests
+      - name: execute main.py script
+        run: python main.py
